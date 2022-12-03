@@ -682,31 +682,6 @@ export default function Orderform() {
                   </FormControl>
                 </SimpleGrid>
               </Stack>
-              <Box
-                px={{
-                  base: 4,
-                  sm: 6,
-                }}
-                py={3}
-                bg="blue.700"
-                _dark={{
-                  bg: "#121212",
-                }}
-                textAlign="right"
-              >
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  color={"black"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
-                >
-                  Save
-                </Button>
-              </Box>
             </GridItem>
           </SimpleGrid>
         </Box>
