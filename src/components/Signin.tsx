@@ -8,6 +8,7 @@ export default function Login() {
   return (
     <Container>
         <div>
+            {address}
         <ConnectKitButton.Custom>
           {({ isConnected, show, ensName }) => {
 
