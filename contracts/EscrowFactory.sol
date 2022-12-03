@@ -9,7 +9,7 @@ contract ContractFactory {
     // Escrow[] public EscrowContractArray;
 
     // will  be called by the invoice
-    function createEscrowContract() external pure returns(address){
+    function createEscrowContract() external returns(address){
         Escrow newEscrow = new Escrow();
         // EscrowContractArray.push(newEscrow);
         return address(newEscrow);

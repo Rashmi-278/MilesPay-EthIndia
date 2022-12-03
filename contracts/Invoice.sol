@@ -23,7 +23,7 @@ contract Invoice is ERC721URIStorage {
 
     constructor() ERC721("Invoice NFT", "INVNFT"){
       owner = payable(msg.sender); // ex:- only dhl  can create the invoice
-      factoryContractAddress = "someAddress";
+      factoryContractAddress = 0xB8fa5247544ed3DBd24627A0D6Fb2d53a785134a;
     }
 
     modifier onlyOwner {
@@ -88,7 +88,7 @@ contract Invoice is ERC721URIStorage {
 
         // mapApproverWithMilestones(approverAdd);
 
-        createInvoice(newInvoiceId, shipingFee, escrowContractAdddress);
+        createInvoice(newInvoiceId, 1, escrowContractAdddress);
 
         return newInvoiceId;
     }

@@ -1,46 +1,6 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/thermal-ice/Downloads/Web Development/ETHIndia Hackathon/SunFloraHack/contracts/Invoice.sol": {
-      "lastModificationDate": 1670095750113,
-      "contentHash": "ade2a852f2cac3d70110ba424b884982",
-      "sourceName": "contracts/Invoice.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/utils/Counters.sol",
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
-        "./Escrow.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Invoice"
-      ]
-    },
     "/home/thermal-ice/Downloads/Web Development/ETHIndia Hackathon/SunFloraHack/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
       "lastModificationDate": 1670083866415,
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
@@ -480,8 +440,8 @@
       ]
     },
     "/home/thermal-ice/Downloads/Web Development/ETHIndia Hackathon/SunFloraHack/contracts/Escrow.sol": {
-      "lastModificationDate": 1670095711639,
-      "contentHash": "6f95fbbcd3595732ff77bc42ee38b950",
+      "lastModificationDate": 1670108991007,
+      "contentHash": "1cf6a83e2b203e0df54748559c5aa67e",
       "sourceName": "contracts/Escrow.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -512,6 +472,83 @@
       ],
       "artifacts": [
         "Escrow"
+      ]
+    },
+    "/home/thermal-ice/Downloads/Web Development/ETHIndia Hackathon/SunFloraHack/contracts/EscrowFactory.sol": {
+      "lastModificationDate": 1670109500370,
+      "contentHash": "7d75fc7afd188fa8ad0eac872222755b",
+      "sourceName": "contracts/EscrowFactory.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Escrow.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ContractFactory"
+      ]
+    },
+    "/home/thermal-ice/Downloads/Web Development/ETHIndia Hackathon/SunFloraHack/contracts/Invoice.sol": {
+      "lastModificationDate": 1670110734765,
+      "contentHash": "e95e0167b6dfb93cd2ed3b213398b5eb",
+      "sourceName": "contracts/Invoice.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ContractFactory",
+        "Invoice"
       ]
     }
   }
