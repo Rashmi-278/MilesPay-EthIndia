@@ -24,19 +24,17 @@ import {
                   position: 'absolute',
                   bottom: 1,
                   left: 0,
-                  bg: 'blue.400',
                   zIndex: -1,
                 }}>
-                Freelance
+                Client Interface for Supply chain management via Dynamic NFTs
               </Text>
               <br />{' '}
               <Text color={'blue.400'} as={'span'}>
-                Design Projects
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              The project board is an exclusive resource for contract work. It's
-              perfect for freelancers, agencies, and moonlighters.
+              The board is an exclusive resource for client to view their invoice, keep track of it and pay for it. It's
+              also used to finalize a transaction and sign off on final payment.
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Button
