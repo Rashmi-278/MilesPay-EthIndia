@@ -8,6 +8,7 @@ export default function UpdateForm() {
     <>
       <Center
         padding={10}
+        height={'100vh'}
         bg="#edf3f8"
         _dark={{
           bg: "#111",
@@ -20,9 +21,11 @@ export default function UpdateForm() {
           <Heading as="h4" size="l">
             Update Invoice
           </Heading>
+          <Login></Login>
+          <Updateform />
+
         </VStack>
       </Center>
-      <Updateform />
     </>
   );
 }

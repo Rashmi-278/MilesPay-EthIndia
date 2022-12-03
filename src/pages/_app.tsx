@@ -25,9 +25,7 @@ const client = createClient(
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [appState, setAppState] = useState({
-    isWalletConnected: false
-  })
+  const [appState, setAppState] = useState(undefined);
   return (
     <ChakraProvider theme={theme}>
       <WagmiConfig client={client}>
