@@ -26,340 +26,398 @@ export default function handler(req, res) {
 
 const pdfData = `<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Invoice</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
-    <style type="text/css">
-      body {
-        margin: 0;
-        font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-          'Noto Color Emoji';
-        font-size: 0.8125rem;
-        font-weight: 400;
-        line-height: 1.5385;
-        color: #333;
-        text-align: left;
-        background-color: #eee;
-      }
 
-      thead {
-        display: table-row-group;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Invoice</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous" />
+  <style type="text/css">
+    body {
+      margin: 0;
+      font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+        Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+      font-size: 0.8125rem;
+      font-weight: 400;
+      line-height: 1.5385;
+      color: #333;
+      text-align: left;
+      background-color: #eee;
+    }
 
-      .mt-50 {
-        margin-top: 50px;
-      }
+    thead {
+      display: table-row-group;
+    }
 
-      .mb-50 {
-        margin-bottom: 50px;
-      }
+    .mt-50 {
+      margin-top: 50px;
+    }
 
-      .card {
-        position: relative;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        border-radius: 0.1875rem;
-      }
+    .mb-50 {
+      margin-bottom: 50px;
+    }
 
-      .card-img-actions {
-        position: relative;
-      }
+    .card {
+      position: relative;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 0.1875rem;
+    }
 
-      .card-body {
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        padding: 1.25rem;
-        text-align: center;
-      }
+    .card-img-actions {
+      position: relative;
+    }
 
-      .card-title {
-        margin-top: 10px;
-        font-size: 17px;
-      }
+    .card-body {
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 1.25rem;
+      text-align: center;
+    }
 
-      .invoice-color {
-        color: red !important;
-      }
+    .card-title {
+      margin-top: 10px;
+      font-size: 17px;
+    }
 
-      .card-header {
-        padding: 0.9375rem 1.25rem;
-        margin-bottom: 0;
-        background-color: rgba(0, 0, 0, 0.02);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-      }
+    .invoice-color {
+      color: red !important;
+    }
 
-      a {
-        text-decoration: none !important;
-      }
+    .card-header {
+      padding: 0.9375rem 1.25rem;
+      margin-bottom: 0;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
 
-      .btn-light {
-        color: #333;
-        background-color: #fafafa;
-        border-color: #ddd;
-      }
+    a {
+      text-decoration: none !important;
+    }
 
-      .header-elements-inline {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-        align-items: center;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-      }
+    .btn-light {
+      color: #333;
+      background-color: #fafafa;
+      border-color: #ddd;
+    }
 
-      @media (min-width: 768px) {
-        .wmin-md-400 {
-          min-width: 400px !important;
-        }
-      }
+    .header-elements-inline {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+    }
 
-      .btn-primary {
-        color: #fff;
-        background-color: #2196f3;
+    @media (min-width: 768px) {
+      .wmin-md-400 {
+        min-width: 400px !important;
       }
+    }
 
-      .btn-labeled > b {
-        position: absolute;
-        top: -1px;
-        background-color: blue;
-        display: block;
-        line-height: 1;
-        padding: 0.62503rem;
-      }
+    .btn-primary {
+      color: #fff;
+      background-color: #2196f3;
+    }
 
-      .center {
-        text-align: center;
-      }
+    .btn-labeled>b {
+      position: absolute;
+      top: -1px;
+      background-color: blue;
+      display: block;
+      line-height: 1;
+      padding: 0.62503rem;
+    }
 
-      .logo {
-        width: 10%;
-        position: absolute;
-        right: 25px;
-      }
-    </style>
-  </head>
+    .center {
+      text-align: center;
+    }
 
-  <body>
-    <div class="container mt-50 mb-50">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card" id="invoice">
-            <div
-              class="card-header bg-transparent header-elements-inline"
-              style="justify-content: center"
-            >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa mollitia obcaecati
-              assumenda
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-12">
-                  <h2 class="text-center">Invoice</h2>
-                </div>
-                <div class="col-sm-6">
-                  <div class="mb-4 pull-left">
-                    <ul class="list list-unstyled mb-0 text-left">
-                      <li>
-                        <a href="https://example.com"
-                          ><span style="color: #3574f1"><strong>Sam</strong></span></a
-                        >
-                      </li>
-                      <li style="color: #000000">8723 ueyui asjadk</li>
-                      <li style="color: #000000">+32233232</li>
-                      <li style="color: #000000">jsdh@smdn.com</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6" style="text-align: right">
-                  <div class="col-sm-12">23-12-2022</div>
-                  <br />
-                  <div class="col-sm-12">Invoice No.: 23</div>
-                </div>
+    .logo {
+      width: 25%;
+      position: absolute;
+      right: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-50 mb-50">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" id="invoice">
+          <div class="card-header bg-transparent header-elements-inline" style="justify-content: center">
+            <strong>MilesPay</strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <h2 class="text-center">Invoice</h2>
               </div>
-              <div class="d-md-flex flex-md-wrap">
-                <div class="mb-4 mb-md-2 text-left">
-                  <img
-                    class="logo"
-                    src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635449__340.png"
-                    id="100"
-                  />
-                  <% if (allInfo) { %>
-                  <ul class="list list-unstyled mb-0">
-                    <% if (true) { %>
+              <div class="col-sm-6">
+                <div class="mb-4 pull-left">
+                  <ul class="list list-unstyled mb-0 text-left">
                     <li>
-                      <h5 class="my-2"><strong>dfsfdf</strong></h5>
+                      <a href="https://example.com"><span style="color: #3574f1"><strong>DHL Courier Services</strong></span></a>
                     </li>
-                    <% } else if (true) { %>
-                    <li>
-                      <h5 class="my-2"><strong>Name Missing</strong></h5>
-                    </li>
-                    <% } else if(true) { %> <% for( let i = 0; i < 3; i++ ) { %>
-                    <li>
-                      <h5 class="my-2"><strong>weweewwe</strong></h5>
-                    </li>
-                    <% } %> <% } %> <% for( let i = 0; i < 2; i++ ) { %> <% if (i===0) { %>
-                    <li>
-                      <span class="font-weight-semibold">hdg sadkjdhas sadb</span>
-                    </li>
-                    <% } else if(i !== 0) { %>
-                    <li>hdg sadkjdhas sadb</li>
-                    <% } %> <% } %>
-                    <li>32322232</li>
-                    <li>
-                      <a href="#" data-abc="true">kdjshd@ms.com</a>
-                    </li>
+                    <li style="color: #000000">8723 lorem ipsum</li>
+                    <li style="color: #000000">+3223323232</li>
+                    <li style="color: #000000">admin@milespays.com</li>
+                    <li style="color: #000000">Tax No.: 36237632623</li>
+                    <li style="color: #000000">Wallet: 0x32762373267823623687</li>
                   </ul>
-                  <% } %>
                 </div>
               </div>
+              <div class="col-sm-6" style="text-align: right">
+                <div class="col-sm-12">23-12-2022</div>
+                <br />
+                <div class="col-sm-12">Invoice No.: 23</div>
+              </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <div class="table-responsive">
-              <table class="table table-lg">
-                <thead>
-                  <tr>
-                    <th>Description</th>
-                    <th>Prix Avant Taxes</th>
-                    <th>TPS(5%)</th>
-                    <th>TVQ(9.975%)</th>
-                    <th>Prix Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% if (allInfo) { %> <% [2,32].forEach(el => { %>
-                  <tr>
-                    <td>
-                      <h6 class="mb-0">erewrww</h6>
-                      <% if (el) { %>
-                      <br />
-                      <span><strong>Notes: </strong></span>
-                      <br />
-                      <% for( let i = 0; i < 3; i++ ) { %>
-                      <span>dddddf</span>
-                      <br />
-                      <% } %> <% } %> <% if (el) { %>
-                      <br />
-                      <span><strong>Préparation: </strong></span>
-                      <br />
-                      <% for( let i = 0; i < 2; i++ ) { %>
-                      <span>dssdsd</span>
-                      <br />
-                      <% } %> <% } %>
-                    </td>
-                    <td>
-                      <% for( let i = 0; i < 2; i++ ) { %> <% if (i !== 0) { %>
-                      <span class="text-muted">OR</span>
-                      <% } %>
-                      <h6 class="mb-0">23232</h6>
-                      <% } %>
-                    </td>
-                    <td>
-                      <% for( let i = 0; i < 4; i++ ) { %> <% if (i !== 0) { %>
-                      <span class="text-muted">OR</span>
-                      <% } %>
-                      <h6 class="mb-0">22332$</h6>
-                      <% } %>
-                    </td>
-                    <td>
-                      <% for( let i = 0; i < 2; i++ ) { %> <% if (i !== 0) { %>
-                      <span class="text-muted">OR</span>
-                      <% } %>
-                      <h6 class="mb-0"><%= 2332 %>$</h6>
-                      <% } %>
-                    </td>
-                    <td>
-                      <% for( let i = 0; i < 1; i++ ) { %> <% if (i !== 0) { %>
-                      <span class="text-muted">OR</span>
-                      <% } %>
-                      <h6 class="mb-0"><%= 2332 %></h6>
-                      <% } %>
-                    </td>
-                  </tr>
-                  <% }) %> <% } %>
-                </tbody>
-              </table>
+            <div class="d-md-flex flex-md-wrap">
+              <div class="mb-4 mb-md-2 text-left">
+                <img class="logo" src="https://ucd26e70454a3db4b6fe8bb554f9.previews.dropboxusercontent.com/p/thumb/ABtFmqztzos0HSAtkk0f4Jkw88zuNctlhQznajuvEVTapKeF0ni-dOQAhf3WU7T6NJ2QnlxzUr0UK18n8IDski8MiZ78fJ8y_ZY6Hs5F_tVLN0rwAHCRKD6XygrWzsnDCfVW3q6mzh3iVALEUqKXnn8oFV36cIc5Jw9klrhEtAvDVCvziiDHQ0OX1vUswNfZ_4oG5tt9ff9IIGb5azV5rPw1Wqx_TsE0BGEep50SSW3scsuNDl4f8mWl7K_IpWr8om2vGKILHv7rj6OpKbIGD2jsw2lQz5QP2HnJktog_LWnJT2-VaP_-t67m7Og1jMOpgbIXxITtsDqDHMsaeA2BGraBlegp6Qx42LW6WKZQdKskNA_Sep4dsG1mpJYbPb99ylkD0gOc_RVKWzp5su_ljB1SqGbWZcSFtdSrSDpf2hv8A/p.png" id="100" />
+
+                <ul class="list list-unstyled mb-0">
+
+                  <li>
+                    <h5 class="my-2"><strong>Hyundai</strong></h5>
+                  </li>
+
+                  <li>
+                    <span class="font-weight-semibold">56362 lorem ipsum</span>
+                  </li>
+
+                  <li>+7634673476</li>
+
+                  <li>sales@milespays.com</li>
+                  <li style="color: #000000">Wallet: 0x67766767677676767645</li>
+                </ul>
+
+              </div>
             </div>
-            <br />
-            <div class="card-body">
-              <div class="d-md-flex flex-md-wrap">
-                <% if (allInfo) { %>
-                <div style="text-align: left">
-                  <h4>Note:</h4>
-                  <br />
-                  <% for( let i = 0; i < 2; i++ ) { %>
-                  <p>kdajdfk ajhaj asjdajk</p>
-                  <% } %>
-                </div>
-                <% } %>
-                <div class="pt-2 mb-3 wmin-md-400 ml-auto">
-                  <br />
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <th class="text-left">
-                            Total Avant Taxes:
-                            <br />
-                            <br />
-                            Taxes:
-                            <br />
-                            <br />
-                            Total Après Taxes:
-                            <br />
-                            <br />
-                            Dépôt: 3223
-                            <br />
-                            <br />
-                            Payment Made 2332
-                            <br />
-                            <br />
-                            Payment Made # jhgjhghj
-                          </th>
-                          <td class="text-right text-primary">
-                            <h5 class="font-weight-semibold">333443$</h5>
-                            <h5 class="font-weight-semibold" style="margin-top: 16px">544554$</h5>
-                            <h5 class="font-weight-semibold" style="margin-top: 16px">54454$</h5>
-                            <h5 class="font-weight-semibold" style="margin-top: 16px">4545$</h5>
-                            <% for( let i = 0; i < 2; i++ ) { %>
-                            <h5 class="font-weight-semibold" style="margin-top: 16px">434343$</h5>
-                            <% } %>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="text-left">Balance:</th>
-                          <td class="text-right text-primary">
-                            <h5 class="font-weight-semibold">2323$</h5>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+          </div>
+          <br />
+          <div style="display: flex; justify-content: space-around;">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">PickUp Destination</h5>
+                <p class="card-text">
+                  <li>
+                    <span class="font-weight-semibold">36347 lorem ipsum askjdhakjajka</span>
+                  </li>
+                </p>
+
+              </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Drop Destination</h5>
+                <p class="card-text">
+                  <li>
+                    <span class="font-weight-semibold">22222 lorem ipsum askjdhakjajka</span>
+                  </li>
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <br />
+          <div style="display: flex; justify-content: space-around;">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <p class="card-text">
+                  <li>
+                    <span class="font-weight-bold">No. of milestones: 4</span>
+                  </li>
+                  <li>
+                    <span class="font-weight-bold">Milestones Payment Percentages: 10% 10% 10% 70%</span>
+                  </li>
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div style="page-break-after: always;"></div>
+          <div>&nbsp;
+          </div>
+          <div class="table-responsive">
+            <table class="table table-lg">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Per Amount</th>
+                  <th>Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>
+                    <h6 class="mb-0">erewrww</h6>
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">23232</h6>
+
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">22332$</h6>
+
+                  </td>
+                  <td>
+                    <h6 class="mb-0">2332$</h6>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <h6 class="mb-0">erewrww</h6>
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">23232</h6>
+
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">22332$</h6>
+
+                  </td>
+                  <td>
+                    <h6 class="mb-0">2332$</h6>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body">
+            <div class="d-md-flex flex-md-wrap">
+
+              <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                <br />
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th class="text-left">
+                          SubTotal:
+                          <br />
+                          <br />
+                          Taxes:
+                          <br />
+                          <br />
+                          Total:
+                        </th>
+                        <td class="text-right text-primary">
+                          <h5 class="font-weight-semibold">333443$</h5>
+                          <h5 class="font-weight-semibold" style="margin-top: 16px">544554$</h5>
+                          <h5 class="font-weight-semibold" style="margin-top: 16px">54454$</h5>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
+          <h5 style="margin-left: 10px; text-decoration: underline;">Milestones Info</h5>
+          <div class="table-responsive">
+            <table class="table table-lg">
+              <thead>
+                <tr>
+                  <th>MilestoneId</th>
+                  <th>Supervisor Address</th>
+                  <th>Date and Time</th>
+                  <th>Txn Hash</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>
+                    <h6 class="mb-0">23323232</h6>
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">kdjfhjkfh dfdf</h6>
+
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">22-03-22 08:23</h6>
+
+                  </td>
+                  <td>
+                    <h6 class="mb-0">dfjkhfdsjkfds</h6>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <h5 style="margin-left: 10px; text-decoration: underline;">Payments Info</h5>
+          <div class="table-responsive">
+            <table class="table table-lg">
+              <thead>
+                <tr>
+                  <th>PaymentId</th>
+                  <th>Amount</th>
+                  <th>MilestoneId</th>
+                  <th>Date and Time</th>
+                  <th>Txn Hash</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>
+                    <h6 class="mb-0">23323232</h6>
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">32323$</h6>
+
+                  </td>
+                  <td>
+                    <h6 class="mb-0">22323243443</h6>
+                  </td>
+                  <td>
+
+                    <h6 class="mb-0">22-03-22 08:23</h6>
+
+                  </td>
+                  <td>
+                    <h6 class="mb-0">dfjkhfdsjkfds</h6>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 `

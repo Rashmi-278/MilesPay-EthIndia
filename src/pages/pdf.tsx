@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button, Progress } from '@chakra-ui/react'
+import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js'
 
 const Pdf = () => {
   const [html, setHtml] = useState('')
@@ -24,6 +25,35 @@ const Pdf = () => {
     })()
   }, [])
 
+  /* --------code for uploading data to filecoin-------- */
+
+  function getAccessToken() {
+    return process.env.NEXT_PUBLIC_WEB3_STORAGE_API
+  }
+
+  function makeStorageClient() {
+    return new Web3Storage({ token: getAccessToken() })
+  }
+
+  const uploadToIPFS = async (files) => {
+    const client = makeStorageClient()
+    const cid = await client.put(files)
+
+    return cid
+  }
+
+  const savePDF = async () => {
+    try {
+      const obj = { pdfData: pdf }
+      const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' })
+      const files = [new File([blob], 'final.json')]
+      const cid = await uploadToIPFS(files)
+      console.log(cid)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <div style={{ margin: 20 }}>
       <Button>
@@ -31,6 +61,7 @@ const Pdf = () => {
           Download PDF
         </a>
       </Button>
+      <Button onClick={() => savePDF()}>Save PDF</Button>
       <br />
       <br />
       {loading ? (
