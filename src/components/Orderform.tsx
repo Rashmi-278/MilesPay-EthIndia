@@ -30,7 +30,10 @@ export default function Orderform() {
   } = useForm();
 
   function onSubmit(values) {
-    console.log(values)
+    values.invoiceId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+    values.timestamp = Date.now();
+    values.totalAmount =  values.subAmount + ((values.subAmount * values.taxPerc )/100);
+    console.log(values);
     return new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2));
@@ -1227,15 +1230,40 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="number"
-                      name="amount"
-                      id="amount"
+                      name="subAmount"
+                      id="subAmount"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register("amount")}
+                      {...register("subAmount")}
+                    />
+                  </FormControl>
+                  <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
+                    <FormLabel
+                      htmlFor="taxperc"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color="gray.700"
+                      _dark={{
+                        color: "gray.50",
+                      }}
+                    >
+                      Tax Percentage
+                    </FormLabel>
+                    <Input
+                      type="number"
+                      name="taxPerc"
+                      id="taxPerc"
+                      mt={1}
+                      focusBorderColor="brand.400"
+                      shadow="sm"
+                      size="sm"
+                      w="full"
+                      rounded="md"
+                      {...register("taxPerc")}
                     />
                   </FormControl>
                 </SimpleGrid>

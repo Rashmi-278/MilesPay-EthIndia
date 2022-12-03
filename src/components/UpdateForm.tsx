@@ -28,6 +28,8 @@ export default function Updateform() {
   } = useForm();
 
   function onSubmit(values) {
+   
+    console.log(values)
     return new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2));
@@ -81,10 +83,10 @@ export default function Updateform() {
                 lineHeight="6"
                 fontStyle={"bold"}
               >
-                Milstones
+                Milstone
               </Heading>
               <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Milestone infomations
+                Milestone update
               </Heading>
               <Text
                 mt={1}
@@ -94,7 +96,7 @@ export default function Updateform() {
                   color: "gray.400",
                 }}
               >
-                Add milestones involved in the shipment lifecycle
+                update milestones involved in the shipment lifecycle
               </Text>
             </Box>
           </GridItem>
@@ -151,33 +153,7 @@ export default function Updateform() {
                     />
                   </FormControl>
 
-                  <FormControl as={GridItem} colSpan={[6, 4]}>
-                    <FormLabel
-                      htmlFor="Supervisor address"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color="gray.700"
-                      _dark={{
-                        color: "gray.50",
-                      }}
-                    >
-                      Supervisor <address></address>
-                    </FormLabel>
-                    <Input
-                      type="text"
-                      isDisabled={true}
-                      name="supervisor_address"
-                      id="supervisor_address"
-                      mt={1}
-                      focusBorderColor="brand.400"
-                      shadow="sm"
-                      size="sm"
-                      w="full"
-                      rounded="md"
-                      {...register("supervisor_address")}
-                    />
-                  </FormControl>
-
+              
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
                       htmlFor="milstoneTransactionHash"
