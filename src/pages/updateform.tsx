@@ -1,6 +1,7 @@
 import React from "react";
-import { Heading, Center, VStack } from "@chakra-ui/react";
+import { Heading, Center, VStack, HStack } from "@chakra-ui/react";
 import Updateform from "../components/UpdateForm";
+import Login from "../components/Signin";
 
 export default function UpdateForm() {
   return (

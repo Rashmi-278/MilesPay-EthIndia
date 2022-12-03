@@ -7,14 +7,18 @@ import {
   Button,
   Icon,
   IconProps,
+  HStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import SidebarWithHeader from "../components/Sidebar";
+import Login from "../components/Signin";
 
 export default function CallToActionWithIllustration() {
   return (
     <Container maxW={"5xl"}>
+      <HStack align-items={"flex-end"}>
+        <Login></Login>
+      </HStack>
       <Stack
         textAlign={"center"}
         align={"center"}
