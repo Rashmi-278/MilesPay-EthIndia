@@ -11,10 +11,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import SidebarWithHeader from "../components/Sidebar";
+import Login from "../components/Login.js"
 
 export default function CallToActionWithIllustration() {
   return (
     <Container maxW={"5xl"}>
+      <Login />
       <Stack
         textAlign={"center"}
         align={"center"}
@@ -81,7 +83,7 @@ export default function CallToActionWithIllustration() {
               Update Invoice
             </Button>
           </Link>
-        
+
           <Button
             rounded={"full"}
             px={6}
