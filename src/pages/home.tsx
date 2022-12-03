@@ -81,15 +81,7 @@ export default function CallToActionWithIllustration() {
               Update Invoice
             </Button>
           </Link>
-          <Button
-            rounded={"full"}
-            px={6}
-            colorScheme={"blue"}
-            bg={"blue.400"}
-            _hover={{ bg: "blue.500" }}
-          >
-            Update Invoice
-          </Button>
+        
           <Button
             rounded={"full"}
             px={6}
