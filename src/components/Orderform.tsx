@@ -17,6 +17,7 @@ import {
   RadioGroup,
   Text,
   chakra,
+  VStack,
 } from "@chakra-ui/react";
 export default function Orderform() {
   return (
@@ -1122,18 +1123,6 @@ export default function Orderform() {
           </GridItem>
         </SimpleGrid>
       </Box>
-
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
 
       <Divider
         my="5"
