@@ -6,6 +6,8 @@ import { useAccount } from 'wagmi';
 function Login() {
 
   const { address } = useAccount();
+  console.log("in login", address);
+
 
     return (
         <Container>

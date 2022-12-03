@@ -1,8 +1,14 @@
 import React from "react";
 import Orderform from "../components/Orderform";
 import { Heading, Center, VStack } from "@chakra-ui/react";
+import { useAccount } from 'wagmi';
+
+
 
 export default function TextTrxxack() {
+  const { address } = useAccount();
+  console.log("in create", address);
+
   return (
     <>
       <Center

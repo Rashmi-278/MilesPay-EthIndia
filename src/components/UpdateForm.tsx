@@ -20,7 +20,13 @@ import {
   chakra,
   VStack,
 } from "@chakra-ui/react";
+import { useAccount } from 'wagmi';
+
 export default function Updateform() {
+
+  const { address } = useAccount();
+  console.log("in updateForm", address);
+
   const {
     handleSubmit,
     register,
