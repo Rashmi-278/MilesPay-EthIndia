@@ -22,19 +22,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 export default function Orderform() {
+  const invoiceData = [];
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm()
+  } = useForm();
 
   function onSubmit(values) {
     return new Promise<void>((resolve) => {
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        resolve()
-      }, 3000)
-    })
+        alert(JSON.stringify(values, null, 2));
+        resolve();
+      }, 3000);
+    });
   }
   return (
     <Box
@@ -44,74 +45,74 @@ export default function Orderform() {
       }}
       p={10}
     >
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
+      <chakra.form
+        method="POST"
+        shadow="base"
+        rounded={[null, "md"]}
+        overflow={{
+          sm: "hidden",
         }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
 
-      <Box mt={[10, 0]}>
-        <SimpleGrid
-          display={{
-            base: "initial",
-            md: "grid",
-          }}
-          columns={{
-            md: 3,
-          }}
-          spacing={{
-            md: 6,
-          }}
-        >
-          <GridItem
-            colSpan={{
-              md: 1,
+        <Box mt={[10, 0]}>
+          <SimpleGrid
+            display={{
+              base: "initial",
+              md: "grid",
+            }}
+            columns={{
+              md: 3,
+            }}
+            spacing={{
+              md: 6,
             }}
           >
-            <Box px={[4, 0]}>
-              <Heading
-                fontSize="lg"
-                fontWeight="medium"
-                lineHeight="6"
-                fontStyle={"bold"}
-              >
-                From
-              </Heading>
-              <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Organization Information
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color="gray.600"
-                _dark={{
-                  color: "gray.400",
-                }}
-              >
-                Specify Orgnization details and pick up address.
-              </Text>
-            </Box>
-          </GridItem>
-          <GridItem
-            mt={[5, null, 0]}
-            colSpan={{
-              md: 2,
-            }}
-          >
-            <chakra.form
-              method="POST"
-              shadow="base"
-              rounded={[null, "md"]}
-              overflow={{
-                sm: "hidden",
+            <GridItem
+              colSpan={{
+                md: 1,
               }}
-              onSubmit={handleSubmit(onSubmit)}
+            >
+              <Box px={[4, 0]}>
+                <Heading
+                  fontSize="lg"
+                  fontWeight="medium"
+                  lineHeight="6"
+                  fontStyle={"bold"}
+                >
+                  From
+                </Heading>
+                <Heading fontSize="md" fontWeight="medium" lineHeight="6">
+                  Organization Information
+                </Heading>
+                <Text
+                  mt={1}
+                  fontSize="sm"
+                  color="gray.600"
+                  _dark={{
+                    color: "gray.400",
+                  }}
+                >
+                  Specify Orgnization details and pick up address.
+                </Text>
+              </Box>
+            </GridItem>
+            <GridItem
+              mt={[5, null, 0]}
+              colSpan={{
+                md: 2,
+              }}
             >
               <Stack
                 px={4}
@@ -146,7 +147,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromOrgName')}
+                      {...register("fromOrgName")}
                     />
                   </FormControl>
 
@@ -173,7 +174,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromTaxId')}
+                      {...register("fromTaxId")}
                     />
                   </FormControl>
 
@@ -200,7 +201,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromEmail')}
+                      {...register("fromEmail")}
                     />
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[6, 4]}>
@@ -225,7 +226,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromWallet')}
+                      {...register("fromWallet")}
                     />
                   </FormControl>
 
@@ -251,7 +252,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromCountry')}
+                      {...register("fromCountry")}
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -282,7 +283,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromStreet')}
+                      {...register("fromStreet")}
                     />
                   </FormControl>
 
@@ -308,7 +309,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromCity')}
+                      {...register("fromCity")}
                     />
                   </FormControl>
 
@@ -335,7 +336,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromState')}
+                      {...register("fromState")}
                     />
                   </FormControl>
 
@@ -361,108 +362,73 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
-                      {...register('fromPostalCode')}
+                      {...register("fromPostalCode")}
                     />
                   </FormControl>
                 </SimpleGrid>
               </Stack>
-              <Box
-                px={{
-                  base: 4,
-                  sm: 6,
-                }}
-                py={3}
-                bg="blue.700"
-                _dark={{
-                  bg: "#121212",
-                }}
-                textAlign="right"
-              >
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  color={"black"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
-                  isLoading={isSubmitting}
+            </GridItem>
+          </SimpleGrid>
+        </Box>
+
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
+
+        <Box mt={[10, 0]}>
+          <SimpleGrid
+            display={{
+              base: "initial",
+              md: "grid",
+            }}
+            columns={{
+              md: 3,
+            }}
+            spacing={{
+              md: 6,
+            }}
+          >
+            <GridItem
+              colSpan={{
+                md: 1,
+              }}
+            >
+              <Box px={[4, 0]}>
+                <Heading
+                  fontSize="lg"
+                  fontWeight="medium"
+                  lineHeight="6"
+                  fontStyle={"bold"}
                 >
-                  Save
-                </Button>
+                  To
+                </Heading>
+                <Heading fontSize="md" fontWeight="medium" lineHeight="6">
+                  Organization Information
+                </Heading>
+                <Text
+                  mt={1}
+                  fontSize="sm"
+                  color="gray.600"
+                  _dark={{
+                    color: "gray.400",
+                  }}
+                >
+                  Specify Orgnization details and drop off address.
+                </Text>
               </Box>
-            </chakra.form>
-          </GridItem>
-        </SimpleGrid>
-      </Box>
-
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
-
-      <Box mt={[10, 0]}>
-        <SimpleGrid
-          display={{
-            base: "initial",
-            md: "grid",
-          }}
-          columns={{
-            md: 3,
-          }}
-          spacing={{
-            md: 6,
-          }}
-        >
-          <GridItem
-            colSpan={{
-              md: 1,
-            }}
-          >
-            <Box px={[4, 0]}>
-              <Heading
-                fontSize="lg"
-                fontWeight="medium"
-                lineHeight="6"
-                fontStyle={"bold"}
-              >
-                To
-              </Heading>
-              <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Organization Information
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color="gray.600"
-                _dark={{
-                  color: "gray.400",
-                }}
-              >
-                Specify Orgnization details and drop off address.
-              </Text>
-            </Box>
-          </GridItem>
-          <GridItem
-            mt={[5, null, 0]}
-            colSpan={{
-              md: 2,
-            }}
-          >
-            <chakra.form
-              method="POST"
-              shadow="base"
-              rounded={[null, "md"]}
-              overflow={{
-                sm: "hidden",
+            </GridItem>
+            <GridItem
+              mt={[5, null, 0]}
+              colSpan={{
+                md: 2,
               }}
             >
               <Stack
@@ -478,7 +444,7 @@ export default function Orderform() {
                 <SimpleGrid columns={6} spacing={6}>
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="org_name"
+                      htmlFor="toOrgName"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -490,21 +456,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="org_name"
-                      id="org_name"
-                      autoComplete="given-name"
+                      name="toOrgName"
+                      id="toOrgName"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toOrgName")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="taxid"
+                      htmlFor="toTaxId"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -516,21 +482,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="taxid"
-                      id="taxis"
-                      autoComplete="tax number"
+                      name="toTaxId"
+                      id="toTaxId"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toTaxId")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 4]}>
                     <FormLabel
-                      htmlFor="email_address"
+                      htmlFor="toEmail"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -542,20 +508,20 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="orgemail_address"
-                      id="orgemail_address"
-                      autoComplete="email"
+                      name="toEmail"
+                      id="toEmail"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toEmail")}
                     />
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[6, 4]}>
                     <FormLabel
-                      htmlFor="orgwallet_address"
+                      htmlFor="toWallet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -567,21 +533,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="orgwallet_address"
-                      id="orgwallet_address"
-                      autoComplete="email"
+                      name="toWallet"
+                      id="toWallet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toWallet")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="toCountry"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -592,9 +558,8 @@ export default function Orderform() {
                       Country / Region
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
+                      id="toCountry"
+                      name="toCountry"
                       placeholder="Select option"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -602,6 +567,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toCountry")}
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -612,7 +578,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={6}>
                     <FormLabel
-                      htmlFor="street_address"
+                      htmlFor="toStreet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -624,21 +590,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="street_address"
-                      id="street_address"
-                      autoComplete="street-address"
+                      name="toStreet"
+                      id="toStreet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toStreet")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="city"
+                      htmlFor="toCity"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -650,21 +616,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="city"
+                      name="toCity"
+                      id="toCity"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toCity")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="state"
+                      htmlFor="toState"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -676,21 +642,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="state"
-                      id="state"
-                      autoComplete="state"
+                      name="toState"
+                      id="toState"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toState")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="postal_code"
+                      htmlFor="toPostcode"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -702,8 +668,8 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="postal_code"
-                      id="postal_code"
+                      name="toPostcode"
+                      id="toPostcode"
                       autoComplete="postal-code"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -711,6 +677,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("toPostcode")}
                     />
                   </FormControl>
                 </SimpleGrid>
@@ -740,76 +707,67 @@ export default function Orderform() {
                   Save
                 </Button>
               </Box>
-            </chakra.form>
-          </GridItem>
-        </SimpleGrid>
-      </Box>
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
+            </GridItem>
+          </SimpleGrid>
+        </Box>
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
 
-      <Box mt={[10, 0]}>
-        <SimpleGrid
-          display={{
-            base: "initial",
-            md: "grid",
-          }}
-          columns={{
-            md: 3,
-          }}
-          spacing={{
-            md: 6,
-          }}
-        >
-          <GridItem
-            colSpan={{
-              md: 1,
+        <Box mt={[10, 0]}>
+          <SimpleGrid
+            display={{
+              base: "initial",
+              md: "grid",
+            }}
+            columns={{
+              md: 3,
+            }}
+            spacing={{
+              md: 6,
             }}
           >
-            <Box px={[4, 0]}>
-              <Heading
-                fontSize="lg"
-                fontWeight="medium"
-                lineHeight="6"
-                fontStyle={"bold"}
-              >
-                Pick up and Drop off
-              </Heading>
-              <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Pick up and Drop off address
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color="gray.600"
-                _dark={{
-                  color: "gray.400",
-                }}
-              >
-                Specify Orgnization details and drop off address.
-              </Text>
-            </Box>
-          </GridItem>
-          <GridItem
-            mt={[5, null, 0]}
-            colSpan={{
-              md: 2,
-            }}
-          >
-            <chakra.form
-              method="POST"
-              shadow="base"
-              rounded={[null, "md"]}
-              overflow={{
-                sm: "hidden",
+            <GridItem
+              colSpan={{
+                md: 1,
+              }}
+            >
+              <Box px={[4, 0]}>
+                <Heading
+                  fontSize="lg"
+                  fontWeight="medium"
+                  lineHeight="6"
+                  fontStyle={"bold"}
+                >
+                  Pick up and Drop off
+                </Heading>
+                <Heading fontSize="md" fontWeight="medium" lineHeight="6">
+                  Pick up and Drop off address
+                </Heading>
+                <Text
+                  mt={1}
+                  fontSize="sm"
+                  color="gray.600"
+                  _dark={{
+                    color: "gray.400",
+                  }}
+                >
+                  Specify Orgnization details and drop off address.
+                </Text>
+              </Box>
+            </GridItem>
+            <GridItem
+              mt={[5, null, 0]}
+              colSpan={{
+                md: 2,
               }}
             >
               <Stack
@@ -829,7 +787,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="pickUpCountry"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -840,16 +798,15 @@ export default function Orderform() {
                       Country / Region
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
-                      placeholder="Select option"
+                      id="pickUpCountry"
+                      name="pickUpCountry"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("pickUpCountry")}
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -860,7 +817,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={6}>
                     <FormLabel
-                      htmlFor="street_address"
+                      htmlFor="pickUpStreet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -872,21 +829,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="street_address"
-                      id="street_address"
-                      autoComplete="street-address"
+                      name="pickUpStreet"
+                      id="pickUpStreet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("pickUpStreet")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="city"
+                      htmlFor="pickUpCity"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -898,21 +855,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="city"
+                      name="pickUpCity"
+                      id="pickUpCity"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("pickUpCity")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="state"
+                      htmlFor="pickUpState"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -924,21 +881,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="state"
-                      id="state"
-                      autoComplete="state"
+                      name="pickUpState"
+                      id="pickUpState"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("pickUpState")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="postal_code"
+                      htmlFor="pickUpPostCode"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -950,15 +907,15 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="postal_code"
-                      id="postal_code"
-                      autoComplete="postal-code"
+                      name="pickUpPostCode"
+                      id="pickUpPostCode"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("pickUpPostCode")}
                     />
                   </FormControl>
                   <Heading fontSize="lg" fontWeight="medium" lineHeight="6">
@@ -967,7 +924,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="dropOffCountry"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -978,9 +935,8 @@ export default function Orderform() {
                       Country / Region
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
+                      id="dropOffCountry"
+                      name="dropOffCountry"
                       placeholder="Select option"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -988,6 +944,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("dropOffCountry")}
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -998,7 +955,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={6}>
                     <FormLabel
-                      htmlFor="street_address"
+                      htmlFor="dropOffStreet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1010,21 +967,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="street_address"
-                      id="street_address"
-                      autoComplete="street-address"
+                      name="dropOffStreet"
+                      id="dropOffStreet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("dropOffStreet")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="city"
+                      htmlFor="dropOffCity"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1036,21 +993,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="city"
+                      name="dropOffCity"
+                      id="dropOffCity"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("dropOffCity")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="state"
+                      htmlFor="dropOffState"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1062,21 +1019,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="state"
-                      id="state"
-                      autoComplete="state"
+                      name="dropOffState"
+                      id="dropOffState"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("dropOffState")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="postal_code"
+                      htmlFor="dropOffPostCode"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1088,129 +1045,81 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="postal_code"
-                      id="postal_code"
-                      autoComplete="postal-code"
+                      name="dropOffPostCode"
+                      id="dropOffPostCode"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("dropOffPostCode")}
                     />
                   </FormControl>
                 </SimpleGrid>
               </Stack>
-              <Box
-                px={{
-                  base: 4,
-                  sm: 6,
-                }}
-                py={3}
-                bg="blue.700"
-                _dark={{
-                  bg: "#121212",
-                }}
-                textAlign="right"
-              >
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  color={"black"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
-                >
-                  Save
-                </Button>
+            </GridItem>
+          </SimpleGrid>
+        </Box>
 
-                <Button
-                  mx={8}
-                  type="submit"
-                  colorScheme="brand"
-                  color={"blue.600"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
+
+        <Box mt={[10, 0]}>
+          <SimpleGrid
+            display={{
+              base: "initial",
+              md: "grid",
+            }}
+            columns={{
+              md: 3,
+            }}
+            spacing={{
+              md: 6,
+            }}
+          >
+            <GridItem
+              colSpan={{
+                md: 1,
+              }}
+            >
+              <Box px={[4, 0]}>
+                <Heading
+                  fontSize="lg"
+                  fontWeight="medium"
+                  lineHeight="6"
+                  fontStyle={"bold"}
                 >
-                  Add
-                </Button>
+                  Items
+                </Heading>
+                <Heading fontSize="md" fontWeight="medium" lineHeight="6">
+                  Invoice items
+                </Heading>
+                <Text
+                  mt={1}
+                  fontSize="sm"
+                  color="gray.600"
+                  _dark={{
+                    color: "gray.400",
+                  }}
+                >
+                  Add items to be included in the invice
+                </Text>
               </Box>
-            </chakra.form>
-          </GridItem>
-        </SimpleGrid>
-      </Box>
-
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
-
-      <Box mt={[10, 0]}>
-        <SimpleGrid
-          display={{
-            base: "initial",
-            md: "grid",
-          }}
-          columns={{
-            md: 3,
-          }}
-          spacing={{
-            md: 6,
-          }}
-        >
-          <GridItem
-            colSpan={{
-              md: 1,
-            }}
-          >
-            <Box px={[4, 0]}>
-              <Heading
-                fontSize="lg"
-                fontWeight="medium"
-                lineHeight="6"
-                fontStyle={"bold"}
-              >
-                Items
-              </Heading>
-              <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Invoice items
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color="gray.600"
-                _dark={{
-                  color: "gray.400",
-                }}
-              >
-                Add items to be included in the invice
-              </Text>
-            </Box>
-          </GridItem>
-          <GridItem
-            mt={[5, null, 0]}
-            colSpan={{
-              md: 2,
-            }}
-          >
-            <chakra.form
-              method="POST"
-              shadow="base"
-              rounded={[null, "md"]}
-              overflow={{
-                sm: "hidden",
+            </GridItem>
+            <GridItem
+              mt={[5, null, 0]}
+              colSpan={{
+                md: 2,
               }}
             >
               <Stack
@@ -1226,7 +1135,7 @@ export default function Orderform() {
                 <SimpleGrid columns={6} spacing={6}>
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="item_name"
+                      htmlFor="itemName"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1238,20 +1147,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="item_name"
-                      id="item_name"
+                      name="itemName"
+                      id="itemName"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("itemName")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="itemid"
+                      htmlFor="itemId"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1263,47 +1173,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="itemid"
+                      name="itemId"
                       id="itemid"
-                      autoComplete="item number"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
-                    />
-                  </FormControl>
-
-                  <FormControl as={GridItem} colSpan={[6, 4]}>
-                    <FormLabel
-                      htmlFor="item description"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color="gray.700"
-                      _dark={{
-                        color: "gray.50",
-                      }}
-                    >
-                      Item Description
-                    </FormLabel>
-                    <Input
-                      type="text"
-                      name="orgemail_address"
-                      id="orgemail_address"
-                      autoComplete="email"
-                      mt={1}
-                      focusBorderColor="brand.400"
-                      shadow="sm"
-                      size="sm"
-                      w="full"
-                      rounded="md"
+                      {...register("itemId")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="quantity"
+                      htmlFor="iquantity"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1315,20 +1199,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="number"
-                      name="quantity"
-                      id="quantity"
+                      name="iquantity"
+                      id="iquantity"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("iquantity")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="peramount"
+                      htmlFor="perAmount"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1340,14 +1225,15 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="number"
-                      name="peramount"
-                      id="peramount"
+                      name="perAmount"
+                      id="perAmount"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("perAmount")}
                     />
                   </FormControl>
 
@@ -1373,106 +1259,73 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("amount")}
                     />
                   </FormControl>
                 </SimpleGrid>
               </Stack>
-              <Box
-                px={{
-                  base: 4,
-                  sm: 6,
-                }}
-                py={3}
-                bg="blue.700"
-                _dark={{
-                  bg: "#121212",
-                }}
-                textAlign="right"
-              >
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  color={"black"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
+            </GridItem>
+          </SimpleGrid>
+        </Box>
+
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
+
+        <Box mt={[10, 0]}>
+          <SimpleGrid
+            display={{
+              base: "initial",
+              md: "grid",
+            }}
+            columns={{
+              md: 3,
+            }}
+            spacing={{
+              md: 6,
+            }}
+          >
+            <GridItem
+              colSpan={{
+                md: 1,
+              }}
+            >
+              <Box px={[4, 0]}>
+                <Heading
+                  fontSize="lg"
+                  fontWeight="medium"
+                  lineHeight="6"
+                  fontStyle={"bold"}
                 >
-                  Save
-                </Button>
+                  Milstones
+                </Heading>
+                <Heading fontSize="md" fontWeight="medium" lineHeight="6">
+                  Milestone infomations
+                </Heading>
+                <Text
+                  mt={1}
+                  fontSize="sm"
+                  color="gray.600"
+                  _dark={{
+                    color: "gray.400",
+                  }}
+                >
+                  Add milestones involved in the shipment lifecycle
+                </Text>
               </Box>
-            </chakra.form>
-          </GridItem>
-        </SimpleGrid>
-      </Box>
-
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
-
-      <Box mt={[10, 0]}>
-        <SimpleGrid
-          display={{
-            base: "initial",
-            md: "grid",
-          }}
-          columns={{
-            md: 3,
-          }}
-          spacing={{
-            md: 6,
-          }}
-        >
-          <GridItem
-            colSpan={{
-              md: 1,
-            }}
-          >
-            <Box px={[4, 0]}>
-              <Heading
-                fontSize="lg"
-                fontWeight="medium"
-                lineHeight="6"
-                fontStyle={"bold"}
-              >
-                Milstones
-              </Heading>
-              <Heading fontSize="md" fontWeight="medium" lineHeight="6">
-                Milestone infomations
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color="gray.600"
-                _dark={{
-                  color: "gray.400",
-                }}
-              >
-                Add milestones involved in the shipment lifecycle
-              </Text>
-            </Box>
-          </GridItem>
-          <GridItem
-            mt={[5, null, 0]}
-            colSpan={{
-              md: 2,
-            }}
-          >
-            <chakra.form
-              method="POST"
-              shadow="base"
-              rounded={[null, "md"]}
-              overflow={{
-                sm: "hidden",
+            </GridItem>
+            <GridItem
+              mt={[5, null, 0]}
+              colSpan={{
+                md: 2,
               }}
             >
               <Stack
@@ -1488,7 +1341,7 @@ export default function Orderform() {
                 <SimpleGrid columns={6} spacing={6}>
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="milestone_name"
+                      htmlFor="mSupervisor1"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1496,24 +1349,25 @@ export default function Orderform() {
                         color: "gray.50",
                       }}
                     >
-                      Milestone Name
+                      Milestone Supervisor 1 wallet address
                     </FormLabel>
                     <Input
                       type="text"
-                      name="milestone_name"
-                      id="milestone_name"
+                      name="mSupervisor1"
+                      id="mSupervisor1"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("mSupervisor1")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="milestoneid"
+                      htmlFor="mSupervisor2"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1521,25 +1375,25 @@ export default function Orderform() {
                         color: "gray.50",
                       }}
                     >
-                      MilestoneID
+                      Milestone Supervisor 1 wallet address
                     </FormLabel>
                     <Input
                       type="text"
-                      name="milestoneid"
-                      id="mliestoneid"
-                      autoComplete="item number"
+                      name="mSupervisor2"
+                      id="mSupervisor2"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("mSupervisor2")}
                     />
                   </FormControl>
 
-                  <FormControl as={GridItem} colSpan={[6, 4]}>
+                  <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="Supervisor address"
+                      htmlFor="mSupervisor3"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -1547,63 +1401,92 @@ export default function Orderform() {
                         color: "gray.50",
                       }}
                     >
-                      Supervisor <address></address>
+                      Milestone Supervisor 1 wallet address
                     </FormLabel>
                     <Input
                       type="text"
-                      name="supervisor_address"
-                      id="supervisor_address"
+                      name="mSupervisor3"
+                      id="mSupervisor3"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("mSupervisor3")}
+                    />
+                  </FormControl>
+
+                  <FormControl as={GridItem} colSpan={[6, 3]}>
+                    <FormLabel
+                      htmlFor="mSupervisor4"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color="gray.700"
+                      _dark={{
+                        color: "gray.50",
+                      }}
+                    >
+                      Milestone Supervisor 1 wallet address
+                    </FormLabel>
+                    <Input
+                      type="text"
+                      name="mSupervisor4"
+                      id="mSupervisor4"
+                      mt={1}
+                      focusBorderColor="brand.400"
+                      shadow="sm"
+                      size="sm"
+                      w="full"
+                      rounded="md"
+                      {...register("mSupervisor4")}
                     />
                   </FormControl>
                 </SimpleGrid>
               </Stack>
-              <Box
-                px={{
-                  base: 4,
-                  sm: 6,
-                }}
-                py={3}
-                bg="blue.700"
-                _dark={{
-                  bg: "#121212",
-                }}
-                textAlign="right"
-              >
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  color={"black"}
-                  background={"white"}
-                  _focus={{
-                    shadow: "",
-                  }}
-                  fontWeight="md"
-                >
-                  Save
-                </Button>
-              </Box>
-            </chakra.form>
-          </GridItem>
-        </SimpleGrid>
-      </Box>
+            </GridItem>
+          </SimpleGrid>
+        </Box>
 
-      <Divider
-        my="5"
-        borderColor="gray.300"
-        _dark={{
-          borderColor: "whiteAlpha.300",
-        }}
-        visibility={{
-          base: "hidden",
-          sm: "visible",
-        }}
-      />
+        <Divider
+          my="5"
+          borderColor="gray.300"
+          _dark={{
+            borderColor: "whiteAlpha.300",
+          }}
+          visibility={{
+            base: "hidden",
+            sm: "visible",
+          }}
+        />
+
+        <Box
+          px={{
+            base: 4,
+            sm: 6,
+          }}
+          py={3}
+          bg="blue.700"
+          _dark={{
+            bg: "#121212",
+          }}
+          textAlign="right"
+        >
+          <Button
+            type="submit"
+            colorScheme="brand"
+            color={"black"}
+            background={"white"}
+            _focus={{
+              shadow: "",
+            }}
+            fontWeight="md"
+            isLoading={isSubmitting}
+          >
+            Submit
+          </Button>
+        </Box>
+      </chakra.form>
     </Box>
   );
 }
