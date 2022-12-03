@@ -27,6 +27,7 @@ export default function Updateform() {
         bg: "#111",
       }}
       p={10}
+      m={'100vh'}
     >
       <Divider
         my="5"
