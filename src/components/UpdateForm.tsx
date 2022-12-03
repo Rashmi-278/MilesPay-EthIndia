@@ -172,6 +172,7 @@ export default function Updateform() {
                     </FormLabel>
                     <Input
                       type="text"
+                      isDisabled={true}
                       name="supervisor_address"
                       id="supervisor_address"
                       mt={1}
