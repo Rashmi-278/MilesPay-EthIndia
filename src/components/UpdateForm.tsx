@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   Box,
   Divider,
@@ -20,6 +21,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 export default function Updateform() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  function onSubmit(values) {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+        resolve();
+      }, 3000);
+    });
+  }
   return (
     <Box
       bg="#edf3f8"
@@ -27,7 +42,7 @@ export default function Updateform() {
         bg: "#111",
       }}
       p={10}
-      m={'100vh'}
+      m={"100vh"}
     >
       <Divider
         my="5"
@@ -96,6 +111,7 @@ export default function Updateform() {
               overflow={{
                 sm: "hidden",
               }}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <Stack
                 px={4}
@@ -108,31 +124,6 @@ export default function Updateform() {
                 spacing={6}
               >
                 <SimpleGrid columns={6} spacing={6}>
-                  <FormControl as={GridItem} colSpan={[6, 3]}>
-                    <FormLabel
-                      htmlFor="milestone_name"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color="gray.700"
-                      _dark={{
-                        color: "gray.50",
-                      }}
-                    >
-                      Milestone Name
-                    </FormLabel>
-                    <Input
-                      type="text"
-                      name="milestone_name"
-                      id="milestone_name"
-                      mt={1}
-                      focusBorderColor="brand.400"
-                      shadow="sm"
-                      size="sm"
-                      w="full"
-                      rounded="md"
-                    />
-                  </FormControl>
-
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
                       htmlFor="milestoneid"
@@ -156,6 +147,7 @@ export default function Updateform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("milestoneid")}
                     />
                   </FormControl>
 
@@ -182,12 +174,13 @@ export default function Updateform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("supervisor_address")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="paymentid"
+                      htmlFor="milstoneTransactionHash"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -198,21 +191,22 @@ export default function Updateform() {
                       Date
                     </FormLabel>
                     <Input
-                      type="date"
-                      name="number"
-                      id="number"
+                      type="text"
+                      name="milstoneTransactionHash"
+                      id="milstoneTransactionHash"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("milstoneTransactionHash")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="time"
+                      htmlFor="Time"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -223,46 +217,22 @@ export default function Updateform() {
                       Time
                     </FormLabel>
                     <Input
-                      type="time"
-                      name="number"
-                      id="number"
+                      type="text"
+                      name="milestoneTimestamp"
+                      id="milestoneTimestamp"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("milestoneTimestamp")}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="paymentid"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color="gray.700"
-                      _dark={{
-                        color: "gray.50",
-                      }}
-                    >
-                      Payment ID
-                    </FormLabel>
-                    <Input
-                      type="number"
-                      name="paymentid"
-                      id="paymentid"
-                      mt={1}
-                      focusBorderColor="brand.400"
-                      shadow="sm"
-                      size="sm"
-                      w="full"
-                      rounded="md"
-                    />
-                  </FormControl>
-
-                  <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-                    <FormLabel
-                      htmlFor="isok"
+                      htmlFor="isOkay"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -274,14 +244,15 @@ export default function Updateform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="isokay"
-                      id="isokay"
+                      name="isOkay"
+                      id="isOkay"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register("isOkay")}
                     />
                   </FormControl>
                 </SimpleGrid>
