@@ -1,26 +1,24 @@
 import React from "react";
 import { ConnectKitButton } from "connectkit";
 import { useAccount } from "wagmi";
-import { Container } from "@chakra-ui/react";
+import { Button, Container, Heading } from "@chakra-ui/react";
 
 export default function Login() {
   const { address } = useAccount();
   return (
     <Container>
-        <div>
-            {address}
-        <ConnectKitButton.Custom>
-          {({ isConnected, show, ensName }) => {
-
-            return (
-              <div className="login" onClick={show}>
-                {isConnected ? ensName ?? "Logout" : "Login"}
-                <div className="bar"></div>
-              </div>
-            );
-          }}
-        </ConnectKitButton.Custom>
-      </div>
+      <Heading as="h6" size="xs">
+      {address}
+      </Heading>
+      <ConnectKitButton.Custom>
+        {({ isConnected, show, ensName }) => {
+          return (
+            <Button onClick={show} >
+              {isConnected ? ensName ?? "Logout" : "Login"}
+            </Button>
+          );
+        }}
+      </ConnectKitButton.Custom>
     </Container>
   );
 }
