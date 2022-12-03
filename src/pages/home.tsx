@@ -9,6 +9,7 @@ import {
   IconProps,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import SidebarWithHeader from "../components/Sidebar";
 
 export default function CallToActionWithIllustration() {
   return (
