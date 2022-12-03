@@ -17,7 +17,7 @@ export default function UpdateForm() {
             MilesPay
           </Heading>
           <Heading as="h4" size="l">
-            Create Invoice
+            Update Invoice
           </Heading>
         </VStack>
       </Center>
