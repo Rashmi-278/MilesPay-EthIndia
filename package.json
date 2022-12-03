@@ -11,6 +11,8 @@
     "@chakra-ui/theme-tools": "^2.0.2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.9.0",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@openzeppelin/contracts": "^4.8.0",
     "axios": "^1.2.0",
     "ejs": "^3.1.8",
     "framer-motion": "^6.3.0",
@@ -25,6 +27,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "hardhat": "^2.12.3",
     "typescript": "^4.7.2"
   }
 }
