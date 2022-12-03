@@ -11,7 +11,7 @@ const alchemyId = "L5y5rMAxy2S29WmJJkgz8x4iCkLzSEoV";
 
 const client = createClient(
   getDefaultClient({
-    appName: "Metropolis",
+    appName: "MilesPay",
     alchemyId,
     chains,
   }),

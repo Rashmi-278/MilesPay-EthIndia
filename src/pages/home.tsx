@@ -11,10 +11,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import SidebarWithHeader from "../components/Sidebar";
-
+import Login from "../components/Login";
 export default function CallToActionWithIllustration() {
   return (
     <Container maxW={"5xl"}>
+      <Login />
       <Stack
         textAlign={"center"}
         align={"center"}
