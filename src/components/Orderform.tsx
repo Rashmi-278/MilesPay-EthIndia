@@ -1,4 +1,6 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+
 import {
   Box,
   Divider,
@@ -20,6 +22,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 export default function Orderform() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm()
+
+  function onSubmit(values) {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2))
+        resolve()
+      }, 3000)
+    })
+  }
   return (
     <Box
       bg="#edf3f8"
@@ -95,6 +111,7 @@ export default function Orderform() {
               overflow={{
                 sm: "hidden",
               }}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <Stack
                 px={4}
@@ -109,7 +126,7 @@ export default function Orderform() {
                 <SimpleGrid columns={6} spacing={6}>
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="org_name"
+                      htmlFor="fromOrgName"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -121,21 +138,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="org_name"
-                      id="org_name"
-                      autoComplete="given-name"
+                      name="fromOrgName"
+                      id="fromOrgName"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromOrgName')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="taxid"
+                      htmlFor="fromTaxId"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -147,8 +164,8 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="taxid"
-                      id="taxis"
+                      name="fromTaxId"
+                      id="fromTaxId"
                       autoComplete="tax number"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -156,12 +173,13 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromTaxId')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 4]}>
                     <FormLabel
-                      htmlFor="email_address"
+                      htmlFor="fromEmail"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -173,8 +191,8 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="orgemail_address"
-                      id="orgemail_address"
+                      name="fromEmail"
+                      id="fromEmail"
                       autoComplete="email"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -182,11 +200,12 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromEmail')}
                     />
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[6, 4]}>
                     <FormLabel
-                      htmlFor="orgwallet_address"
+                      htmlFor="fromWallet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -198,21 +217,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="orgwallet_address"
-                      id="orgwallet_address"
-                      autoComplete="email"
+                      name="fromWallet"
+                      id="fromWallet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromWallet')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="fromCountry"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -223,9 +242,8 @@ export default function Orderform() {
                       Country / Region
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
+                      id="fromCountry"
+                      name="fromCountry"
                       placeholder="Select option"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -233,6 +251,7 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromCountry')}
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -243,7 +262,7 @@ export default function Orderform() {
 
                   <FormControl as={GridItem} colSpan={6}>
                     <FormLabel
-                      htmlFor="street_address"
+                      htmlFor="fromStreet"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -255,21 +274,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="street_address"
-                      id="street_address"
-                      autoComplete="street-address"
+                      name="fromStreet"
+                      id="fromStreet"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromStreet')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="city"
+                      htmlFor="fromCity"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -281,21 +300,21 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="city"
+                      name="fromCity"
+                      id="fromCity"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromCity')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="state"
+                      htmlFor="fromState"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -307,8 +326,8 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="state"
-                      id="state"
+                      name="fromState"
+                      id="fromState"
                       autoComplete="state"
                       mt={1}
                       focusBorderColor="brand.400"
@@ -316,12 +335,13 @@ export default function Orderform() {
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromState')}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="postal_code"
+                      htmlFor="fromPostalCode"
                       fontSize="sm"
                       fontWeight="md"
                       color="gray.700"
@@ -333,15 +353,15 @@ export default function Orderform() {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="postal_code"
-                      id="postal_code"
-                      autoComplete="postal-code"
+                      name="fromPostalCode"
+                      id="fromPostalCode"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      {...register('fromPostalCode')}
                     />
                   </FormControl>
                 </SimpleGrid>
@@ -367,6 +387,7 @@ export default function Orderform() {
                     shadow: "",
                   }}
                   fontWeight="md"
+                  isLoading={isSubmitting}
                 >
                   Save
                 </Button>
