@@ -9,6 +9,7 @@ import {
   IconProps,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import SidebarWithHeader from "../components/Sidebar";
 
 export default function CallToActionWithIllustration() {
@@ -28,20 +29,20 @@ export default function CallToActionWithIllustration() {
           lineHeight={"110%"}
         >
           Supply Chain Invoicing{" "}
-          <Text as={"span"} color={"orange.400"}>
+          <Text as={"span"} color={"blue.400"}>
             made easy with Dyanmic NFTs
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
-            Lorem Ipsum 
+          Lorem Ipsum
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button
             rounded={"full"}
             px={6}
-            colorScheme={"orange"}
-            bg={"orange.400"}
-            _hover={{ bg: "orange.500" }}
+            colorScheme={"blue"}
+            bg={"blue.400"}
+            _hover={{ bg: "blue.500" }}
           >
             Get started
           </Button>
@@ -50,52 +51,53 @@ export default function CallToActionWithIllustration() {
           </Button>
         </Stack>
         <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "l", md: "xl" }}
-            lineHeight={"110%"}
-            fontStyle={"bold"}
-          >
-            Panel
-          </Heading>
+          fontWeight={600}
+          fontSize={{ base: "2xl", sm: "l", md: "xl" }}
+          lineHeight={"110%"}
+          fontStyle={"bold"}
+        >
+          Panel
+        </Heading>
         <Stack spacing={6} direction={"row"}>
-         
+          <Link href={'/create'}>
+            <Button
+              rounded={"full"}
+              px={6}
+              colorScheme={"blue"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
+            >
+              Create Invoice
+            </Button>
+          </Link>
+
           <Button
             rounded={"full"}
             px={6}
-            colorScheme={"orange"}
+            colorScheme={"blue"}
             bg={"blue.400"}
-            _hover={{ bg: "orange.500" }}
-          >
-            Create Invoice
-          </Button>
-          <Button
-            rounded={"full"}
-            px={6}
-            colorScheme={"orange"}
-            bg={"blue.400"}
-            _hover={{ bg: "orange.500" }}
+            _hover={{ bg: "blue.500" }}
           >
             Update Invoice
           </Button>
           <Button
             rounded={"full"}
             px={6}
-            colorScheme={"orange"}
+            colorScheme={"blue"}
             bg={"blue.400"}
-            _hover={{ bg: "orange.500" }}
+            _hover={{ bg: "blue.500" }}
           >
             Read Invoice
           </Button>
           <Button
             rounded={"full"}
             px={6}
-            colorScheme={"orange"}
+            colorScheme={"blue"}
             bg={"blue.400"}
-            _hover={{ bg: "orange.500" }}
+            _hover={{ bg: "blue.500" }}
           >
             Finalize
           </Button>
-          
         </Stack>
         <Flex w={"full"}>
           <Illustration
