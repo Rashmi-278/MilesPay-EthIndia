@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 import { useState, React } from 'react'
+=======
+import React from 'react'
+>>>>>>> 33d8d55458042c902c0d1d32b5fe4c6b0778cdbf
 import styled from 'styled-components'
-import { ConnectKitButton } from "connectkit";
-import { useAccount } from 'wagmi';
 
 function Login() {
+<<<<<<< HEAD
 
   const [Connected, setConnected] = useState(false);
   const { address } = useAccount();
@@ -32,6 +35,12 @@ function Login() {
             }
           }
         </ConnectKitButton.Custom>
+=======
+    return (
+        <Container>
+          <div>
+            
+>>>>>>> 33d8d55458042c902c0d1d32b5fe4c6b0778cdbf
           </div>
         </Container>
     )
@@ -43,6 +52,7 @@ export default Login
 const Container=styled.div`
   width: 300px;
   height: 50px;
+<<<<<<< HEAD
 
   display: flex;
   justify-content: center;
@@ -88,4 +98,7 @@ const Container=styled.div`
       opacity: 0.8;
     }
   }
+=======
+  border: 1px solid black;
+>>>>>>> 33d8d55458042c902c0d1d32b5fe4c6b0778cdbf
 `
