@@ -35,7 +35,7 @@ contract Invoice is ERC721URIStorage {
     struct milestoneData {
         address approverAddress;
         uint256 approveTimeStamp;
-        uint256 atWhichMilestone;
+        uint256 atWhichMilestone; // milestone id
         string transactionHash;
         uint256 amount; // transaction amount at that milestone
         bool isOkay; // for verification
