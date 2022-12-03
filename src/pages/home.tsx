@@ -59,7 +59,7 @@ export default function CallToActionWithIllustration() {
           Panel
         </Heading>
         <Stack spacing={6} direction={"row"}>
-          <Link href={'/create'}>
+          <Link href={"/create"}>
             <Button
               rounded={"full"}
               px={6}
@@ -70,7 +70,17 @@ export default function CallToActionWithIllustration() {
               Create Invoice
             </Button>
           </Link>
-
+          <Link href={"/updateform"}>
+            <Button
+              rounded={"full"}
+              px={6}
+              colorScheme={"blue"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
+            >
+              Update Invoice
+            </Button>
+          </Link>
           <Button
             rounded={"full"}
             px={6}
