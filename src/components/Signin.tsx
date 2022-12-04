@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ConnectKitButton } from "connectkit";
 import { useAccount } from "wagmi";
-import { Button, Container, Heading } from "@chakra-ui/react";
+import { Button, Container, Heading, Stack } from "@chakra-ui/react";
 
 import { AppContext } from "../pages/_app";
 
@@ -11,21 +11,28 @@ export default function Login() {
 
   console.log(appState);
   return (
-    <Container>
-      <Heading as="h6" size="xs">
-        {address}
-      </Heading>
-      <ConnectKitButton.Custom>
-        {({ isConnected, show, ensName }) => {
-          setAppState(address);
+    <Stack
+      flex={{ base: 1, md: 0 }}
+      justify={"flex-end"}
+      direction={"row"}
+      spacing={6}
+    >
+      <Container>
+        <Heading as="h6" size="xs">
+          {address}
+        </Heading>
+        <ConnectKitButton.Custom>
+          {({ isConnected, show, ensName }) => {
+            setAppState(address);
 
-          return (
-            <Button onClick={show}>
-              {isConnected ? ensName ?? "Logout" : "Login"}
-            </Button>
-          );
-        }}
-      </ConnectKitButton.Custom>
-    </Container>
+            return (
+              <Button onClick={show} color={"blue.500"}>
+                {isConnected ? ensName ?? "Logout" : "Login"}
+              </Button>
+            );
+          }}
+        </ConnectKitButton.Custom>
+      </Container>
+    </Stack>
   );
 }

@@ -4,7 +4,7 @@ import React from "react";
 export default function () {
     return(
         <Container>
-            //DUMMMY
+            //implement powerloom api
         </Container>
     )
 }
