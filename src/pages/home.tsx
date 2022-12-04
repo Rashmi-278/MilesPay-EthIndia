@@ -63,7 +63,7 @@ export default function CallToActionWithIllustration() {
           Panel
         </Heading>
         <Stack spacing={6} direction={"row"}>
-          <Link href={"/create"}>
+          <Link href={"/createInvoice"}>
             <Button
               rounded={"full"}
               px={6}
@@ -85,25 +85,28 @@ export default function CallToActionWithIllustration() {
               Update Invoice
             </Button>
           </Link>
-
-          <Button
-            rounded={"full"}
-            px={6}
-            colorScheme={"blue"}
-            bg={"blue.400"}
-            _hover={{ bg: "blue.500" }}
-          >
-            Read Invoice
-          </Button>
-          <Button
-            rounded={"full"}
-            px={6}
-            colorScheme={"blue"}
-            bg={"blue.400"}
-            _hover={{ bg: "blue.500" }}
-          >
-            Finalize
-          </Button>
+          <Link href={'/viewinvoice'}>
+            <Button
+              rounded={"full"}
+              px={6}
+              colorScheme={"blue"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
+            >
+              Read Invoice
+            </Button>
+          </Link>
+          <Link href={'/finalize'}>
+            <Button
+              rounded={"full"}
+              px={6}
+              colorScheme={"blue"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
+            >
+              Finalize
+            </Button>
+          </Link>
         </Stack>
         <Flex w={"full"}>
           <Illustration
