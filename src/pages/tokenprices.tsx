@@ -4,7 +4,7 @@ import React from "react";
 export default function () {
     return(
         <Container>
-            //implement powerloom api
+            //implement powerloom api to display token prices
         </Container>
     )
 }

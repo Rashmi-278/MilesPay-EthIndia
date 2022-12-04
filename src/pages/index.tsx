@@ -16,15 +16,15 @@ import Login from "../components/Signin";
 export default function CallToActionWithIllustration() {
   return (
     <Container maxW={"5xl"}>
-      <HStack align-items={"flex-end"}>
-        <Login></Login>
-      </HStack>
       <Stack
         textAlign={"center"}
         align={"center"}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}
       >
+        <HStack align-items={"flex-end"}>
+          <Login></Login>
+        </HStack>
         <Image src={"/logo.png"} alt={"logo"} width={220} height={80}></Image>
 
         <Heading
@@ -37,9 +37,18 @@ export default function CallToActionWithIllustration() {
             made easy with Dyanmic NFTs
           </Text>
         </Heading>
-        <Text color={"gray.500"} maxW={"3xl"}>
-          Lorem Ipsum
-        </Text>
+
+        <Heading
+          fontWeight={600}
+          fontSize={{ base: "xl", sm: "l", md: "2l" }}
+          lineHeight={"110%"}
+        >
+          <Text as={"span"} color={"gray.500"}>
+          Mint a Dynamic NFT Invoice to manage the whole lifecycle of the
+          shipment order and ensure timely payments
+          </Text>
+        </Heading>
+       
         <Stack spacing={6} direction={"row"}>
           <Button
             rounded={"full"}

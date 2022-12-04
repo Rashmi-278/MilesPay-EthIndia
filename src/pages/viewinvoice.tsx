@@ -1,6 +1,5 @@
 import React from "react";
-import Orderform from "../components/Orderform";
-
+import Pdf from "./pdf";
 export default function TextTrxxack() {
-  return <Orderform />;
+  return <Pdf />;
 }
