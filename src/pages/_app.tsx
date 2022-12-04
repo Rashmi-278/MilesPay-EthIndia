@@ -1,8 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
-import { WagmiConfig, createClient, chain, configureChains } from 'wagmi'
+import {
+  ConnectKitProvider,
+  ConnectKitButton,
+  getDefaultClient,
+} from "connectkit";
+import { WagmiConfig, createClient, chain, configureChains } from "wagmi";
 import theme from "../theme";
 import { AppProps } from "next/app";
+import React, { useState } from "react";
+
+export const AppContext = React.createContext(undefined);
 
 // setup a wagmi client first
 const chains = [chain.polygonMumbai];
@@ -14,17 +21,20 @@ const client = createClient(
     appName: "MilesPay",
     alchemyId,
     chains,
-  }),
+  })
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [appState, setAppState] = useState(undefined);
   return (
     <ChakraProvider theme={theme}>
-    <WagmiConfig client={client}>
-    <ConnectKitProvider>
-      <Component {...pageProps} />
-    </ConnectKitProvider>
-     </WagmiConfig>
+      <WagmiConfig client={client}>
+        <ConnectKitProvider>
+          <AppContext.Provider value={{appState, setAppState}}>
+            <Component {...pageProps} />
+          </AppContext.Provider>
+        </ConnectKitProvider>
+      </WagmiConfig>
     </ChakraProvider>
   );
 }
