@@ -255,7 +255,19 @@ export default function Updateform() {
                   }}
                   fontWeight="md"
                 >
-                  Save
+                  Submit
+                </Button>
+                <Button
+                  type="submit"
+                  colorScheme="brand"
+                  color={"black"}
+                  background={"white"}
+                  _focus={{
+                    shadow: "",
+                  }}
+                  fontWeight="md"
+                >
+                  Mint
                 </Button>
               </Box>
             </chakra.form>
