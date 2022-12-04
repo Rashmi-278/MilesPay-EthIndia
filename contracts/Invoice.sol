@@ -6,13 +6,10 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract Escrow {
-    // add a receive function
-    address shipingCompanyAddress = 0x22b6Dd4D6d818e2Ebce3D2E009A249F8FbF4e965;
+// this will call contractFactory functions
 
-    function sendAmount(uint amount) public payable {
-        payable(shipingCompanyAddress).transfer(amount);
-    }
+interface ContractFactory {
+    function createEscrowContract() external pure returns(address);
 }
 
 contract Invoice is ERC721URIStorage {
@@ -20,11 +17,13 @@ contract Invoice is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _InvoiceIds; // total number of invoice-NFTs
 
-    //DHL will mint the invoice NFTs so it will be the owner
+
     address payable owner;
+    address factoryContractAddress;
 
     constructor() ERC721("Invoice NFT", "INVNFT"){
       owner = payable(msg.sender); // ex:- only dhl  can create the invoice
+      factoryContractAddress = 0xB8fa5247544ed3DBd24627A0D6Fb2d53a785134a;
     }
 
     modifier onlyOwner {
@@ -51,18 +50,10 @@ contract Invoice is ERC721URIStorage {
         address payable invoiceOwner;
         address escrowContractAddress;
         bool isCompleted;
-        /*------Metadata------*/ // static data , maybe u have to create another URI me packa all the metaDataURI
-        // string fromDataURI;
-        // string toDataURI;
-        // string itemDataURI;
-        /*-------------------*/
 
         uint timeStamp; // timestamp when the lastPayment is received
         string pdfURI;
 
-        // this field will be updated after the contract is minted
-        // mapping(uint256 => milestoneData) milestoneMapping; // will have only 4 milestone for demo.
-        // string[] milestoneTxnHash; //
         milestoneData[4] milestoneArray;
 
     }
@@ -77,9 +68,8 @@ contract Invoice is ERC721URIStorage {
         address[4] memory approverAdd //
     ) public payable onlyOwner returns(uint256){
 
-        // creat an escrow account for this nft invoice
-        Escrow  newContract = new Escrow();
-        address newContractAdddress = address(newContract);
+        // create an escrow account for this nft invoice
+        address escrowContractAdddress = callFactory(factoryContractAddress);
 
         // require(newContractAdddress.balance > shipingFee,"Not enough balance");
 
@@ -98,7 +88,7 @@ contract Invoice is ERC721URIStorage {
 
         // mapApproverWithMilestones(approverAdd);
 
-        createInvoice(newInvoiceId, shipingFee, newContractAdddress);
+        createInvoice(newInvoiceId, 1, escrowContractAdddress);
 
         return newInvoiceId;
     }
@@ -116,17 +106,18 @@ contract Invoice is ERC721URIStorage {
       idToInvoiceNFT[invoiceID].invoiceOwner = owner;
     }
 
+
+    // function to call escrow factory contract
+    function callFactory(address addr) public returns(address){
+        ContractFactory prototype =  ContractFactory(addr);
+        return prototype.createEscrowContract();
+    }
+
+    // ex: for hyundai
     function getEscrowContractAddress(uint256 invoiceID) public view returns(address){
       InvoiceNFT storage currentNFT = idToInvoiceNFT[invoiceID];
       return currentNFT.escrowContractAddress;
     }
-
-    // will receie the approver address as an array and then will map it
-    // function mapApproverWithMilestones(address[4] memory appovers) public {
-    //     for(uint i=0; i<4; i++){
-    //         idToMilestone[i].approverAddress = appovers[0];
-    //     }
-    // }
 
     function fetchInvoices() public view returns(InvoiceNFT[] memory) {
       uint256 invoiceCount = _InvoiceIds.current();
@@ -145,17 +136,11 @@ contract Invoice is ERC721URIStorage {
 
     // dynamic part of the contract
     function createMilestoneTransaction(uint256 milestoneID, uint256 shipingFee, uint256 invoiceID, bool isOkay) public payable {
-      // 10% 30% 50% and 100% at milestone 1,2,3 and 4 respectively
-      // handle percentage in bips
-      // create an event for this transaction
+
       InvoiceNFT storage currentNFT = idToInvoiceNFT[invoiceID];
 
       require(!(currentNFT.isCompleted),"Final invoice is already generated.");
-      uint256 firstPaymentAmount;
-      uint256 secondPaymentAmount;
-      uint256 thirdPaymentAmount;
-      uint256 lastPaymentAmount;
-      // create a pointer
+
 
 
       // checkpoint 1
@@ -163,16 +148,13 @@ contract Invoice is ERC721URIStorage {
         require(msg.sender == currentNFT.milestoneArray[0].approverAddress ,"address is not approver.");
         // do the transaction
         currentNFT.milestoneArray[0].isOkay = isOkay;
-        address escrowAddr = currentNFT.escrowContractAddress;
 
         if( currentNFT.milestoneArray[0].isOkay==true){
-            // call the escrow contract and transfer  the ammount
            currentNFT.milestoneArray[0].atWhichMilestone=1;
-           firstPaymentAmount = (shipingFee/10000)*10000; // (10 * 100, as we are dealing in bips)
-           currentNFT.milestoneArray[0].amount = firstPaymentAmount;
-           Escrow newEscrow = Escrow(escrowAddr);
-           newEscrow.sendAmount(firstPaymentAmount);
+        //  currentNFT.milestoneArray[0].amount = firstPaymentAmount;
            currentNFT.milestoneArray[0].approveTimeStamp = block.timestamp;
+           address escAddress = currentNFT.escrowContractAddress;
+           (bool success,) = escAddress.call(abi.encodeWithSignature("sendAmount(address)", currentNFT.milestoneArray[0].approverAddress));
            currentNFT.milestoneArray[0].isDone = true;
         }
 
@@ -182,16 +164,13 @@ contract Invoice is ERC721URIStorage {
         require(msg.sender == currentNFT.milestoneArray[1].approverAddress ,"address is not approver.");
         // do the transaction
         currentNFT.milestoneArray[1].isOkay = isOkay;
-        address escrowAddr = currentNFT.escrowContractAddress;
 
         if( currentNFT.milestoneArray[1].isOkay==true){
-            // call the escrow contract and transfer  the ammount
            currentNFT.milestoneArray[1].atWhichMilestone=2;
-           secondPaymentAmount = ((shipingFee/30000)*10000) - firstPaymentAmount; // (30 * 100, as we are dealing in bips)
-           currentNFT.milestoneArray[1].amount = secondPaymentAmount;
-           Escrow newEscrow = Escrow(escrowAddr);
-           newEscrow.sendAmount(secondPaymentAmount);
+        //    currentNFT.milestoneArray[1].amount = secondPaymentAmount;
            currentNFT.milestoneArray[1].approveTimeStamp = block.timestamp;
+           address escAddress = currentNFT.escrowContractAddress;
+           (bool success,) = escAddress.call(abi.encodeWithSignature("sendAmount(address)", currentNFT.milestoneArray[1].approverAddress));
            currentNFT.milestoneArray[1].isDone = true;
         }
       }
@@ -200,18 +179,15 @@ contract Invoice is ERC721URIStorage {
         require(msg.sender == currentNFT.milestoneArray[2].approverAddress ,"address is not approver.");
         // do the transaction
         currentNFT.milestoneArray[2].isOkay = isOkay;
-        address escrowAddr = currentNFT.escrowContractAddress;
 
         if( currentNFT.milestoneArray[2].isOkay==true){
             // call the escrow contract and transfer  the ammount
            currentNFT.milestoneArray[2].atWhichMilestone=3;
-           secondPaymentAmount = ((shipingFee/50000)*10000) - secondPaymentAmount; // (50 * 100, as we are dealing in bips)
-           currentNFT.milestoneArray[2].amount = thirdPaymentAmount;
-           Escrow newEscrow = Escrow(escrowAddr);
-           newEscrow.sendAmount(thirdPaymentAmount);
+        //    currentNFT.milestoneArray[2].amount = thirdPaymentAmount;
            currentNFT.milestoneArray[2].approveTimeStamp = block.timestamp;
+           address escAddress = currentNFT.escrowContractAddress;
+           (bool success,) = escAddress.call(abi.encodeWithSignature("sendAmount(address)", currentNFT.milestoneArray[2].approverAddress));
            currentNFT.milestoneArray[2].isDone = true;
-
         }
       }
       // checkpoint 4
@@ -219,16 +195,13 @@ contract Invoice is ERC721URIStorage {
         require(msg.sender == currentNFT.milestoneArray[3].approverAddress ,"address is not approver.");
         // do the transaction
         currentNFT.milestoneArray[3].isOkay = isOkay;
-        address escrowAddr = currentNFT.escrowContractAddress;
 
         if( currentNFT.milestoneArray[3].isOkay==true){
             // call the escrow contract and transfer  the ammount
-           currentNFT.milestoneArray[2].atWhichMilestone=4;
-           lastPaymentAmount = currentNFT.shipingFee - (firstPaymentAmount+secondPaymentAmount+thirdPaymentAmount);
-           currentNFT.milestoneArray[3].amount = lastPaymentAmount;
-           Escrow newEscrow = Escrow(escrowAddr);
-           newEscrow.sendAmount(lastPaymentAmount);
+           currentNFT.milestoneArray[3].atWhichMilestone=4;
            currentNFT.milestoneArray[3].approveTimeStamp = block.timestamp;
+           address escAddress = currentNFT.escrowContractAddress;
+           (bool success,) = escAddress.call(abi.encodeWithSignature("sendAmount(address)", currentNFT.milestoneArray[3].approverAddress));
            currentNFT.timeStamp = block.timestamp;
            currentNFT.milestoneArray[3].isDone = true;
            currentNFT.isCompleted = true;
