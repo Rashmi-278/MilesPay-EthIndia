@@ -18,7 +18,3 @@ By converting an Invoice into NFT, we bring the transaction info of every busine
 NFT Invoices also prevent fake/missing invoices which are a huge problem with tax avoidance, and they also prove as a proof of purchase for both client and the contractor which is a foolproof way to ensure that both of them are following proper business practices.
 
 Moreover, with proof of purchase, it provides authenticity for the resale market with verified purchase from a brand.
-
-
-
-
